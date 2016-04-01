@@ -9,10 +9,14 @@ namespace FizVizController
 {
     public sealed partial class ManualControl : UserControl
     {
+        private DispatcherTimer randomPositionTimer;
+        private Random random = new Random();
+
         public ManualControl()
         {
             this.InitializeComponent();
             InitializeNeedleDirection();
+            randomPositionTimer = null;
         }
 
         /****************************************************************
@@ -39,6 +43,36 @@ namespace FizVizController
             App.FizViz.SendCommand(positionCommand);
         }
 
+        private void RandomButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (randomPositionTimer == null)
+            {
+                randomPositionTimer = new DispatcherTimer();
+                randomPositionTimer.Interval = new TimeSpan(0, 0, 1);
+                randomPositionTimer.Tick += RandomPositionTimerOnTick;
+                randomPositionTimer.Start();
+            }
+            else
+            {
+                randomPositionTimer.Stop();
+                randomPositionTimer = null;
+            }
+        }
+
+        private void RandomPositionTimerOnTick(object sender, object o)
+        {
+            int? min = ViewUtility.GetInt(MinRandomTextBox);
+            int? max = ViewUtility.GetInt(MaxRandomTextBox);
+            if (!min.HasValue || !max.HasValue) return;
+            int position = random.Next(min.Value, max.Value);
+            NeedlePosition positionCommand = new NeedlePosition
+            {
+                Position = (uint)position,
+                Direction = NeedlePosition.NeedleDirectionValue.DoNotPassZero
+            };
+            App.FizViz.SendCommand(positionCommand);
+        }
+
         /****************************************************************
          *                  Helper functions                            *
          ****************************************************************/
@@ -58,5 +92,7 @@ namespace FizVizController
             NeedleDirectionComboBox.Items.Add(new KeyValuePair<string, NeedlePosition.NeedleDirectionValue>("Do Not Cross Zero", NeedlePosition.NeedleDirectionValue.DoNotPassZero));
             NeedleDirectionComboBox.SelectedIndex = 0;
         }
+
+
     }
 }

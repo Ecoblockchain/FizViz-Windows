@@ -129,7 +129,7 @@ namespace FizVizController
             FadeDurationTextBox.Visibility = displayMode == DisplayMode.DisplayModeValue.BackgroundRotate
                 ? Visibility.Collapsed
                 : Visibility.Visible;
-            
+            FadeDurationLabel.Text = displayMode == DisplayMode.DisplayModeValue.MinMax ? "Min Max Reset (s)" : "Fade Duration (ms)";
         }
 
         /// <summary>

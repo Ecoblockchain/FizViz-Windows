@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="150"
+    d:DesignHeight="200"
     d:DesignWidth="600">
 
     <StackPanel Margin="0,5" Padding="5" Orientation="Vertical">
@@ -19,13 +19,21 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Needle Position (0-1200)" />
             <TextBox Grid.Row="0" Grid.Column="1" x:Name="NeedlePositionTextBox" HorizontalAlignment="Left" Text="0" Width="150"/>
             <TextBlock Grid.Row="0" Grid.Column="2" Text="Needle Direction"/>
             <ComboBox Grid.Row="0" Grid.Column="3" Name="NeedleDirectionComboBox" Width="150" />
+            <Button Grid.Row="1" Grid.Column="0" x:Name="NeedlePositionButton" Padding="5" Content="Update FizViz Needle" HorizontalAlignment="Left" Click="NeedlePositionButton_Click"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Min Random Position" />
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="MinRandomTextBox" HorizontalAlignment="Left" Text="0" Width="150"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Max Random Position" />
+            <TextBox Grid.Row="2" Grid.Column="3" x:Name="MaxRandomTextBox" HorizontalAlignment="Left" Text="0" Width="150"/>
+            <Button Grid.Row="3" Grid.Column="0" x:Name="RandomButton" Padding="5" Content="Random Updates" HorizontalAlignment="Left" Click="RandomButton_OnClick"/>
         </Grid>
-        <Button x:Name="NeedlePositionButton" Padding="5" Content="Update FizViz Needle" HorizontalAlignment="Left" Click="NeedlePositionButton_Click"/>
 
     </StackPanel>
 </UserControl>
