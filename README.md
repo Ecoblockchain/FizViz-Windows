@@ -11,3 +11,6 @@ Project Defines and Setup
 -------------------------
 You'll need to change one constant to make it match up with your FizViz setup - go to Commands/DisplayMode/FizVizCommand.cs, and down at the bottom, make sure NEOPIXEL_COUNT matches what you've got in the Arduino project.
 
+Use of Remote Arduino Wiring
+-------------------------
+We're using the Firmata protocol to talk to the FizViz, but instead of directly controlling output pins and such, we set up a number of custom commands ("Move needle to this position", "Change background colors" etc.).  In order to do that, we forked the remote-wiring repository and made one small change - adding a pass-through function that allows us to send out custom Firmata control messages.
