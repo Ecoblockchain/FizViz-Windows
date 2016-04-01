@@ -107,6 +107,7 @@
     <Compile Include="Commands\DisplayMode\BlockNeedleDisplayMode.cs" />
     <Compile Include="Commands\DisplayMode\DisplayMode.cs" />
     <Compile Include="Commands\DisplayMode\HotNeedleDisplayMode.cs" />
+    <Compile Include="Commands\DisplayMode\MinMaxDisplayMode.cs" />
     <Compile Include="Commands\FizVizCommand.cs" />
     <Compile Include="Commands\MinMaxCommand.cs" />
     <Compile Include="Commands\NeedlePosition.cs" />

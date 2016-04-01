@@ -6,7 +6,8 @@
         {
             HotNeedle = 0,
             BlockNeedle = 1,
-            BackgroundRotate = 2
+            BackgroundRotate = 2,
+            MinMax = 3
         };
 
 

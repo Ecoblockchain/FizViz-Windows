@@ -51,6 +51,11 @@ namespace FizVizController
                         displayMode = GetBackgroundRotate();
                     }
                     break;
+                case DisplayMode.DisplayModeValue.MinMax:
+                    {
+                        displayMode = GetMinMax();
+                    }
+                    break;
                 default:
                     return;
             }
@@ -88,54 +93,43 @@ namespace FizVizController
         {
             bool useHighlight = UseHighlight.IsChecked.HasValue && UseHighlight.IsChecked.Value;
 
-            switch ((DisplayMode.DisplayModeValue)LightingModeComboBox.SelectedValue)
+            DisplayMode.DisplayModeValue displayMode = (DisplayMode.DisplayModeValue) LightingModeComboBox.SelectedValue;
+
+            BrightHoldLabel.Visibility = displayMode == DisplayMode.DisplayModeValue.BlockNeedle ? Visibility.Visible : Visibility.Collapsed;
+            BrightHoldTextBox.Visibility = displayMode == DisplayMode.DisplayModeValue.BlockNeedle ? Visibility.Visible : Visibility.Collapsed;
+
+            PixelOffsetLabel.Visibility = displayMode == DisplayMode.DisplayModeValue.BackgroundRotate
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+            PixelOffsetTextBox.Visibility = displayMode == DisplayMode.DisplayModeValue.BackgroundRotate
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+            if (displayMode == DisplayMode.DisplayModeValue.HotNeedle ||
+                displayMode == DisplayMode.DisplayModeValue.BlockNeedle)
             {
-                case DisplayMode.DisplayModeValue.HotNeedle:
-                    BrightHoldLabel.Visibility = Visibility.Collapsed;
-                    BrightHoldTextBox.Visibility = Visibility.Collapsed;
-                    PixelOffsetLabel.Visibility = Visibility.Collapsed;
-                    PixelOffsetTextBox.Visibility = Visibility.Collapsed;
-                    HighlightMultiplierLabel.Visibility = useHighlight ? Visibility.Visible : Visibility.Collapsed;
-                    HighlightMultiplierTextBox.Visibility = useHighlight ? Visibility.Visible : Visibility.Collapsed;
-                    HotColorLabel.Visibility = useHighlight ? Visibility.Collapsed : Visibility.Visible;
-                    HotColorComboBox.Visibility = useHighlight ? Visibility.Collapsed : Visibility.Visible;
-                    FadeDurationLabel.Visibility = Visibility.Visible;
-                    FadeDurationTextBox.Visibility = Visibility.Visible;
-                    UseHighlightLabel.Visibility = Visibility.Visible;
-                    UseHighlight.Visibility = Visibility.Visible;
-                    break;
-                case DisplayMode.DisplayModeValue.BlockNeedle:
-                    BrightHoldLabel.Visibility = Visibility.Visible;
-                    BrightHoldTextBox.Visibility = Visibility.Visible;
-                    PixelOffsetLabel.Visibility = Visibility.Collapsed;
-                    PixelOffsetTextBox.Visibility = Visibility.Collapsed;
-                    HighlightMultiplierLabel.Visibility = useHighlight ? Visibility.Visible : Visibility.Collapsed;
-                    HighlightMultiplierTextBox.Visibility = useHighlight ? Visibility.Visible : Visibility.Collapsed;
-                    HotColorLabel.Visibility = useHighlight ? Visibility.Collapsed : Visibility.Visible;
-                    HotColorComboBox.Visibility = useHighlight ? Visibility.Collapsed : Visibility.Visible;
-                    FadeDurationLabel.Visibility = Visibility.Visible;
-                    FadeDurationTextBox.Visibility = Visibility.Visible;
-                    UseHighlightLabel.Visibility = Visibility.Visible;
-                    UseHighlight.Visibility = Visibility.Visible;
-                    break;
-                case DisplayMode.DisplayModeValue.BackgroundRotate:
-                    BrightHoldLabel.Visibility = Visibility.Collapsed;
-                    BrightHoldTextBox.Visibility = Visibility.Collapsed;
-                    PixelOffsetLabel.Visibility = Visibility.Visible;
-                    PixelOffsetTextBox.Visibility = Visibility.Visible;
-                    HighlightMultiplierLabel.Visibility = Visibility.Collapsed;
-                    HighlightMultiplierTextBox.Visibility = Visibility.Collapsed;
-                    HotColorLabel.Visibility = Visibility.Collapsed;
-                    HotColorComboBox.Visibility = Visibility.Collapsed;
-                    FadeDurationLabel.Visibility = Visibility.Collapsed;
-                    FadeDurationTextBox.Visibility = Visibility.Collapsed;
-                    UseHighlightLabel.Visibility = Visibility.Collapsed;
-                    UseHighlight.Visibility = Visibility.Collapsed;
-
-                    break;
+                HighlightMultiplierLabel.Visibility = useHighlight ? Visibility.Visible : Visibility.Collapsed;
+                HighlightMultiplierTextBox.Visibility = useHighlight ? Visibility.Visible : Visibility.Collapsed;
+                HotColorLabel.Visibility = useHighlight ? Visibility.Collapsed : Visibility.Visible;
+                HotColorComboBox.Visibility = useHighlight ? Visibility.Collapsed : Visibility.Visible;
+                UseHighlightLabel.Visibility = Visibility.Visible;
+                UseHighlight.Visibility = Visibility.Visible;
             }
-
-
+            else
+            {
+                HighlightMultiplierLabel.Visibility = Visibility.Collapsed;
+                HighlightMultiplierTextBox.Visibility = Visibility.Collapsed;
+                HotColorLabel.Visibility = displayMode == DisplayMode.DisplayModeValue.MinMax ? Visibility.Visible : Visibility.Collapsed;
+                HotColorComboBox.Visibility = displayMode == DisplayMode.DisplayModeValue.MinMax ? Visibility.Visible : Visibility.Collapsed;
+                UseHighlightLabel.Visibility = Visibility.Collapsed;
+                UseHighlight.Visibility = Visibility.Collapsed;
+            }
+            FadeDurationLabel.Visibility = displayMode == DisplayMode.DisplayModeValue.BackgroundRotate
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+            FadeDurationTextBox.Visibility = displayMode == DisplayMode.DisplayModeValue.BackgroundRotate
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+            
         }
 
         /// <summary>
@@ -148,6 +142,7 @@ namespace FizVizController
             LightingModeComboBox.Items.Add(new KeyValuePair<string, DisplayMode.DisplayModeValue>("Hot Needle", DisplayMode.DisplayModeValue.HotNeedle));
             LightingModeComboBox.Items.Add(new KeyValuePair<string, DisplayMode.DisplayModeValue>("Block Needle", DisplayMode.DisplayModeValue.BlockNeedle));
             LightingModeComboBox.Items.Add(new KeyValuePair<string, DisplayMode.DisplayModeValue>("BG Rotate", DisplayMode.DisplayModeValue.BackgroundRotate));
+            LightingModeComboBox.Items.Add(new KeyValuePair<string, DisplayMode.DisplayModeValue>("Min Max", DisplayMode.DisplayModeValue.MinMax));
             LightingModeComboBox.SelectedIndex = 0;
 
             ViewUtility.InitializeColorComboBox(HotColorComboBox);
@@ -220,6 +215,18 @@ namespace FizVizController
             return new BackgroundRotateDisplayMode
             {
                 Offset = offset.Value
+            };
+        }
+
+        private DisplayMode GetMinMax()
+        {
+            ushort? fadeTime = ViewUtility.GetUShort(FadeDurationTextBox);
+            if (!fadeTime.HasValue) return null;
+
+            return new MinMaxDisplayMode
+            {
+                NeedleColor = (Color)HotColorComboBox.SelectedValue,
+                ResetTime = fadeTime.Value
             };
         }
 
