@@ -1,0 +1,25 @@
+﻿<UserControl
+    x:Class="FizVizController.FizVizConnection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FizVizController"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="150"
+    d:DesignWidth="400">
+
+    <StackPanel Margin="0,5" Padding="5">
+        <StackPanel>
+            <TextBlock Text="FizViz" FontSize="16" HorizontalAlignment="Left"></TextBlock>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+            <TextBox x:Name="IPAddressTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="IP Address" Width="120" KeyUp="IPAddressTextBox_KeyUp" Padding="10"/>
+            <TextBox x:Name="PortTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Port" Width="50" KeyUp="PortTextBox_KeyUp" Padding="10"/>
+            <Button x:Name="ConnectButton" Padding="5" Content="Connect" HorizontalAlignment="Center" Click="ConnectButton_Click" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+            <TextBlock x:Name="ConnectMessage" TextWrapping="Wrap" Text="Status: Not Connected"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

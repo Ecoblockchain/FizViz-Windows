@@ -1,0 +1,56 @@
+﻿<UserControl
+    x:Class="FizVizController.BackgroundColorConfig"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FizVizController"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="762">
+    <StackPanel Margin="0,5" Padding="5" Orientation="Vertical">
+
+        <Grid x:Name="ControlGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Color Mode"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ColorModeComboBox" HorizontalAlignment="Stretch" PlaceholderText="Color Mode" SelectionChanged="ColorModeComboBox_SelectionChanged" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Color 1"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" x:Name="Color1ComboBox" HorizontalAlignment="Stretch" PlaceholderText="Color 1"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Start Angle"/>
+            <TextBox Grid.Row="1" Grid.Column="3" x:Name="StartAngle1TextBox" Text="0"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="End Angle"/>
+            <TextBox Grid.Row="1" Grid.Column="5" x:Name="EndAngle1TextBox" Text="360"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Color 1"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="Color1ComboBox_Gradient" HorizontalAlignment="Stretch" PlaceholderText="Color 1"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Color 1 Angle"/>
+            <TextBox Grid.Row="2" Grid.Column="3" x:Name="Angle1TextBox" Text="0"/>
+            
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Color 2"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="Color2ComboBox" HorizontalAlignment="Stretch" PlaceholderText="Color 2"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="Color 2 Angle"/>
+            <TextBox Grid.Row="3" Grid.Column="3" x:Name="Angle2TextBox" Text="180"/>
+            
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Color 3"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="Color3ComboBox" HorizontalAlignment="Stretch" PlaceholderText="Color 3"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="Color 3 Angle"/>
+            <TextBox Grid.Row="4" Grid.Column="3" x:Name="Angle3TextBox" Text="360"/>
+
+        </Grid>
+        <Button x:Name="BackgroundColorButton" Padding="5" Content="Update FizViz Background Color" HorizontalAlignment="Left" Click="BackgroundColorButton_Click"/>
+
+    </StackPanel>
+</UserControl>

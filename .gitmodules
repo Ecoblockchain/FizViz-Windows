@@ -1,0 +1,3 @@
+[submodule "FizVizController/remote-wiring"]
+	path = FizVizController/remote-wiring
+	url = https://github.com/iotdesignshop/remote-wiring

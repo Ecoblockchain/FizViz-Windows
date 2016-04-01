@@ -1,0 +1,41 @@
+﻿<UserControl
+    x:Class="FizVizController.MinMaxConfig"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="450">
+
+    <StackPanel Margin="0,5" Padding="5" Orientation="Vertical">
+
+        <Grid x:Name="ControlGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Show Min"/>
+            <CheckBox Grid.Row="0" Grid.Column="1" Name="DisplayMin" IsChecked="False"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Min"/>
+            <ComboBox Grid.Row="0" Grid.Column="3" x:Name="MinColorComboBox" HorizontalAlignment="Stretch" PlaceholderText="Min Color"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Show Max"/>
+            <CheckBox Grid.Row="1" Grid.Column="1" Name="DisplayMax" IsChecked="False"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Max"/>
+            <ComboBox Grid.Row="1" Grid.Column="3" x:Name="MaxColorComboBox" HorizontalAlignment="Stretch" PlaceholderText="Max Color"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Reset Delay (min)"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="10" x:Name="ResetTextBox" />
+        </Grid>
+        <Button x:Name="MinMaxButton" Padding="5" Content="Update FizViz Min/Max" HorizontalAlignment="Left" Click="MinMaxButton_Click" />
+
+    </StackPanel>
+</UserControl>
